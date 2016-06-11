@@ -10,10 +10,10 @@ CSV.foreach('inventory.csv', headers: true) do |product|
         # Ignore empty or nil variants
         unless product["Variant #{num} - Name"].nil? || product["Variant #{num} - Name"].length == 0
             # Set SKU to an all caps abbreviation of the Category, Name, and Variant Name
-            sku = product["Category"].to_s[0..7].upcase + "-" + product["Name"].to_s[0..7].upcase + "-" + product["Variant #{num} - Name"].to_s[0..3].upcase
+            sku = product["Category"].to_s[0..7] + "-" + product["Name"].to_s[0..7] + "-" + product["Variant #{num} - Name"].to_s[0..3]
             product["Variant #{num} - SKU"] =  sku
             # Remove any non alpha-numeric characters with the exception of hyphens.
-            product["Variant #{num} - SKU"] = product["Variant #{num} - SKU"].tr('^0-9A-Z-', '')
+            product["Variant #{num} - SKU"] = product["Variant #{num} - SKU"].upcase.tr('^0-9A-Z-', '')
             updated_inventory << product
             column_names = product.headers
             CSV.open('updated_inventory.csv', 'w') do |csv|
