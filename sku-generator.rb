@@ -13,7 +13,7 @@ CSV.foreach('inventory.csv', headers: true) do |product|
             sku = product["Category"].to_s[0..7].upcase + "-" + product["Name"].to_s[0..7].upcase + "-" + product["Variant #{num} - Name"].to_s[0..3].upcase
             product["Variant #{num} - SKU"] =  sku
             # Remove any non alpha-numeric characters with the exception of hyphens.
-            product["Variant #{num} - SKU"] = product["Variant #{num} - SKU"].gsub(/[^0-9a-z-]/i, '')
+            product["Variant #{num} - SKU"] = product["Variant #{num} - SKU"].tr('^0-9A-Z-', '')
             updated_inventory << product
             column_names = product.headers
             CSV.open('updated_inventory.csv', 'w') do |csv|
