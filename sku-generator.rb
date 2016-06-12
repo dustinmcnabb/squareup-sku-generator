@@ -5,7 +5,7 @@ require 'csv'
 column_names = []
 updated_inventory = []
 
-# Generate SKUs using an all caps abbreviation of the Category, Name, Variant Name, and Variant Number
+# Generate SKUs using an all caps abbreviation of the Category, Name, Variant Name, Variant Number, and a random number.
 def gen_skus(product,num)
     product_category = product["Category"].to_s.upcase.tr('^0-9A-Z ', '').split(' ').map { |word| word.slice(0..3) }.join.slice(0..6)
     product_name = product["Name"].to_s.upcase.tr('^0-9A-Z ', '').split(' ').map { |word| word.slice(0..3) }.join.slice(0..6)
