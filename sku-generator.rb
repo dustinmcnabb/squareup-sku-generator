@@ -10,7 +10,7 @@ def gen_skus(product,num)
     product_category = product["Category"].to_s.upcase.tr('^0-9A-Z ', '').split(' ').map { |word| word.slice(0..3) }.join.slice(0..6)
     product_name = product["Name"].to_s.upcase.tr('^0-9A-Z ', '').split(' ').map { |word| word.slice(0..3) }.join.slice(0..6)
     product_variant = product["Variant #{num} - Name"].to_s.upcase.tr('^0-9A-Z', '').slice(0..2)
-    product["Variant #{num} - SKU"] = [product_category, product_name, product_variant, (num.to_s + rand(1000).to_s)].join("-")
+    product["Variant #{num} - SKU"] = [product_category, product_name, product_variant, (num.to_s + rand(100..1000).to_s)].join("-")
 
 end
 
